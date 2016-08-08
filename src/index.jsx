@@ -158,7 +158,7 @@ export default React.createClass({
   },
   getInitialState() {
     var state = this.makeDateValues(this.props.value);
-    state.focused = false;
+    state.focused = this.props.open;
     state.inputFocused = false;
     state.placeholder = this.props.placeholder || this.props.dateFormat;
     state.separator = this.props.dateFormat.match(/[^A-Z]/)[0];
@@ -329,9 +329,13 @@ export default React.createClass({
       inputValue: this.makeInputValueString(newSelectedDate),
       selectedDate: newSelectedDate,
       displayDate: newSelectedDate,
-      value: newSelectedDate.toISOString(),
-      focused: false
+      value: newSelectedDate.toISOString()
     });
+    if(this.props.open){
+    }
+    else{
+       this.setState({focused: false});
+    }
     if(this.props.onBlur) {
       this.props.onBlur(new Event("Change Date"));
     }
